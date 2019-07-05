@@ -322,7 +322,7 @@ function gd([string]$key, [string]$selectedPath = "", [switch]$help, [switch]$h,
 # Taken from posh-git https://github.com/dahlbyk/posh-git/blob/master/GitTabExpansion.ps1#L297
 
 if (Test-Path Function:\TabExpansion) {
-    Rename-Item Function:\TabExpansion TabExpansionBackup
+    Rename-Item Function:\TabExpansion TabExpansionBackupGoShell
 }
 
 function TabExpansion($line, $lastWord) {
@@ -332,7 +332,7 @@ function TabExpansion($line, $lastWord) {
         # Execute go tab expansion for go command
         '^gd (.*)' { gdTabExpansion($lastBlock) }
         # Fall back on existing tab expansion
-        default { if (Test-Path Function:\TabExpansionBackup) { TabExpansionBackup $line $lastWord } }
+        default { if (Test-Path Function:\TabExpansionBackupGoShell) { TabExpansionBackupGoShell $line $lastWord } }
     }
 }
 function gdTabExpansion($filter) {
